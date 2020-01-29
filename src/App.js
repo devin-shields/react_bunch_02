@@ -7,7 +7,7 @@ import "./App.css";
 import CardSet from "./CardSet";
 import cards from "./cards";
 
-console.log(cards);
+// console.log(cards);
 
 class App extends Component {
   render() {

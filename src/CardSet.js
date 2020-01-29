@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Card from "./Card";
 
 class CardSet extends Component {
   constructor() {
@@ -7,7 +8,7 @@ class CardSet extends Component {
       chosenCards: []
     };
   }
-
+  // duplicate current state into 'copyOfCards', then push onto array, then pass into setState to update state
   saveCourse(index) {
     console.log(index);
     const copyOfCards = [...this.state.chosenCards];
@@ -18,23 +19,16 @@ class CardSet extends Component {
   }
 
   render() {
-    console.log(this.props.cards);
+    console.log(this.state.chosenCards);
+
+    const savedCards = this.state.chosenCards.map((card, index) => {
+      return <h3 key={index}>{card.course}</h3>;
+    });
 
     const cardList = this.props.cards.map((card, index) => {
       return (
         <div className="col s2" key={index}>
-          <div className="card hoverable small">
-            <div className="card-image">
-              <img src={card.image} alt="course visual" />
-            </div>
-            <div className="card-content">
-              <p>{card.course}</p>
-              <p>{card.instructor}</p>
-            </div>
-            <div className="card-action">
-              <a href="#">$9.99</a>
-            </div>
-          </div>
+          <Card card={card} />
           <button
             onClick={() => {
               this.saveCourse(index);
@@ -47,7 +41,12 @@ class CardSet extends Component {
       );
     });
 
-    return <div>{cardList}</div>;
+    return (
+      <div>
+        {cardList}
+        {savedCards}
+      </div>
+    );
   }
 }
 
